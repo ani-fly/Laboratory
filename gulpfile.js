@@ -1,27 +1,34 @@
-const gulp = require("gulp"); // Підключення Gulp
-const concat = require("gulp-concat"); // Підключення плагіна для конкатенації файлів
-const sass = require("gulp-sass")(require("sass")); // Підключення плагіна для компіляції SCSS
-const cssnano = require("gulp-cssnano"); // Підключення плагіна для мінімізації CSS
-const rename = require("gulp-rename"); // Підключення плагіна для перейменування файлів
-const uglify = require("gulp-uglify"); // Підключення плагіна для мінімізації JS
-const imagemin = require("gulp-imagemin"); // Підключення плагіна для оптимізації зображень
-const browserSync = require("browser-sync").create(); // Підключення BrowserSync
+// Підключення Gulp та плагінів
+const gulp = require("gulp"); 
+const concat = require("gulp-concat"); 
+const sass = require("gulp-sass")(require("sass")); 
+const cssnano = require("gulp-cssnano"); 
+const rename = require("gulp-rename"); 
+const uglify = require("gulp-uglify"); 
+const imagemin = require("gulp-imagemin"); 
+const browserSync = require("browser-sync").create(); 
+const fileinclude = require("gulp-file-include"); 
 
+// Шляхи
 const paths = {
-  html: ["app/index.html", "app/html/**/*.html"],
-  scss: "app/scss/**/*.scss",
-  js: "app/js/**/*.js",
-  images: "app/img/**/*"
+  html: ["app/*.html"],        // головні файли
+  scss: "app/scss/**/*.scss",  // стилі
+  js: "app/js/**/*.js",        // скрипти
+  images: "app/img/**/*"       // картинки
 };
-// Завдання для обробки HTML
 
-export const html_task = () => src('app/index.html')
-    .pipe(fileInclude({
-        prefix: '@@',
-        basepath: '@file'
+// HTML task
+function html() {
+  return gulp.src(paths.html)
+    .pipe(fileinclude({
+      prefix: "@@",
+      basepath: "@file"
     }))
-    .pipe(dest('dist'));
+    .pipe(gulp.dest("dist"))
+    .pipe(browserSync.stream());
+}
 
+// SCSS task
 function scss() {
   return gulp.src(paths.scss)
     .pipe(sass().on("error", sass.logError))
@@ -31,6 +38,7 @@ function scss() {
     .pipe(browserSync.stream());
 }
 
+// JS task
 function js() {
   return gulp.src(paths.js)
     .pipe(concat("script.min.js"))
@@ -39,13 +47,28 @@ function js() {
     .pipe(browserSync.stream());
 }
 
+// Images task
 function images() {
-  return gulp.src(paths.images)
-    .pipe(imagemin())
-    .pipe(gulp.dest("dist/imgs"))
+  return gulp.src(paths.images, { 
+      encoding: false  
+    })
+    .pipe(imagemin()) // Додано imagemin для оптимізації
+    .pipe(gulp.dest("dist/img"))
     .pipe(browserSync.stream());
 }
 
+// Bootstrap tasks
+function bootstrapCSS() {
+  return gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+    .pipe(gulp.dest('dist/css'));
+}
+
+function bootstrapJS() {
+  return gulp.src('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+    .pipe(gulp.dest('dist/js'));
+}
+
+// Server + watch
 function serve() { 
   browserSync.init({
     server: {
@@ -54,20 +77,23 @@ function serve() {
     }
   });
 
-  gulp.watch(paths.html, html); // Слідкування за змінами в HTML
+  gulp.watch(paths.html, html);
   gulp.watch(paths.scss, scss);
   gulp.watch(paths.js, js);
   gulp.watch(paths.images, images);
 }
 
+// Експорти
 exports.html = html;
 exports.scss = scss;
 exports.js = js;
 exports.images = images;
-exports.serve = serve; 
+exports.bootstrapCSS = bootstrapCSS;
+exports.bootstrapJS = bootstrapJS;
+exports.serve = serve;
 
-// Default-завдання
-gulp.task("default", gulp.series(
-  gulp.parallel(html, scss, js, images), // Виконання всіх завдань паралельно
+// Default task
+exports.default = gulp.series(
+  gulp.parallel(html, scss, js, images, bootstrapCSS, bootstrapJS),
   serve
-));
+);

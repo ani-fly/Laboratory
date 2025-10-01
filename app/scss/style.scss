@@ -15,31 +15,44 @@ body::before {
     box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4); /* Тінь тільки в рамці */
     pointer-events: none;
 }
+
+
 .photo-container {
+    position: relative;
     display: inline-block;
-    padding: 20px; /* Відступ навколо рамки */
-    background-color: #f5f5f5; /* Колір фону контейнера */
-}
-
-.double-frame {
-    padding: 15px; /* Відступ між рамками */
-    background-color: #c41616ff; /* колір першої рамки */
-    display: inline-block;
-    border-radius: 8px; /* Закруглені кути (опціонально) */
-
+    width: 300px;
+    height: 300px;
 }
 
 .photo {
     display: block;
-    border: 10px solid white; 
-    border-radius: 4px; /* Закруглені кути для фото */
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
 }
-.portrait-frame {
-    display: inline-block;
-    position: relative;
-    width: 250px; /* Ширина видимої області */
-    height: 350px; /* Висота видимої області */
-    overflow: hidden;
+
+.corner-frame {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;             /* ширина рамки */
+    height: 50px;            /* висота рамки */
+    border-top: 5px solid red;       /* верхня лінія рамки */
+    border-right: 5px solid red;     /* права лінія рамки */
+    border-top-right-radius: 8px;    /* закруглений верхній правий кут */
+    box-sizing: border-box;
 }
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(255,255,255,0.7);
+    padding: 5px 0;
+    font-weight: bold;
+}
+
+

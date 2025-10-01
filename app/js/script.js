@@ -1,1 +1,3 @@
-console.log("Gulp працює")
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Resume site loaded ✅");
+});
