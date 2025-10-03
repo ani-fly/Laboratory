@@ -1,58 +1,245 @@
 body {
-    border: 70px solid #d3d3d3; /* Сіра рамка */
-    margin: 0;
-    background-color: white; /* Біле тло для контенту */
-    position: relative;
-}
-//для того щоб тінь не заходила на тло
-body::before {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  border: 70px solid #d3d3d3;
+  position: relative;
+  min-height: 100vh;
+
+  &::before {
     content: '';
     position: absolute;
     top: -70px;
     left: -70px;
     right: -70px;
     bottom: -70px;
-    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4); /* Тінь тільки в рамці */
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.4);
     pointer-events: none;
+    z-index: -1;
+  }
 }
 
-
-.photo-container {
-    position: relative;
-    display: inline-block;
-    width: 300px;
-    height: 300px;
+.container-fluid {
+  position: relative;
+  z-index: 1;
 }
 
-.photo {
+/* Ліва колонка */
+.left-column {
+  padding: 0;
+  background: white;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  overflow: hidden;
+
+  .red-block {
+    width: 560px;
+    height: 330px;
+    background-color: #c40e0e;
+    margin-bottom: -260px;
+    margin-left: -100px;
+    margin-top: 30px;
+  }
+}
+
+.header-block {
+  text-align: right;
+  position: relative;
+  padding: 30px 0 30px 30px;
+
+  .photo {
+    width: 100%;
+    max-width: 350px;
+    border: 8px solid white;
+    border-radius: 20px;
+    margin: -80px 0 80px auto;
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+    position: relative;
+    z-index: 3;
+  }
 }
 
-.corner-frame {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80px;             /* ширина рамки */
-    height: 50px;            /* висота рамки */
-    border-top: 5px solid red;       /* верхня лінія рамки */
-    border-right: 5px solid red;     /* права лінія рамки */
-    border-top-right-radius: 8px;    /* закруглений верхній правий кут */
-    box-sizing: border-box;
+.name-role {
+  color: white;
+  text-align: left;
+  background-color: rgb(69, 69, 69);
+  padding: 40px 30px 30px 100px;
+  border-radius: 8px 0 0 8px;
+  margin: -120px 0 0;
+  width: 544px;
+  margin-left: -38px;
+  position: relative;
+  z-index: 2;
+  min-height: 150px;
+  box-sizing: border-box;
+  border: 8px solid white;
+
+  .name {
+    font-size: 70px;
+    font-weight: normal;
+    margin: 0;
+    color: white;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .surname {
+    font-size: 70px;
+    font-weight: 900;
+    margin: 0;
+    color: white;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .role {
+    font-size: 18px;
+    font-style: italic;
+    margin: 10px 0 0;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+  }
 }
 
-.caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background: rgba(255,255,255,0.7);
-    padding: 5px 0;
+/* Права колонка */
+.right-column {
+  .about-me-block {
+    padding: 30px;
+    margin-bottom: 20px;
+    background: white;
+    
+    /* Простий червоний контур як на зображенні */
+    border: 1px solid #c40e0e;
+    border-radius: 0; /* Без закруглень */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    .section-title {
+      text-align: center;
+      color: #c40e0e;
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    
+    p {
+      margin: 0;
+      line-height: 1.6;
+      text-align: justify;
+      padding: 0 10px;
+    }
+  }
+}
+
+
+  .contact-me-block {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+  }
+
+  h3 {
+    margin-top: 0;
     font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
+
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  body {
+    border: 20px solid #d3d3d3;
+
+    &::before {
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+    }
+  }
+
+  .left-column,
+  .right-column {
+    padding: 15px;
+  }
+
+  .left-column {
+    min-height: auto;
+    padding-bottom: 30px;
+
+    .red-block {
+      width: 100%;
+      height: 120px;
+      margin-left: -50px;
+      margin-bottom: -60px;
+      margin-top: 30px;
+    }
+  }
+
+  .header-block {
+    text-align: center;
+    padding: 15px;
+
+    .photo {
+      margin: -40px auto 60px;
+      max-width: 200px;
+      z-index: 3;
+    }
+  }
+
+  .name-role {
+    text-align: center;
+    max-width: 100%;
+    padding: 30px 20px 20px;
+    margin-top: -80px;
+    min-height: 100px;
+    border-radius: 8px;
+    margin-left: 0;
+    width: calc(100% - 16px);
+    border: 8px solid white;
+    z-index: 2;
+
+    .name {
+      font-size: 40px;
+    }
+
+    .surname {
+      font-size: 40px;
+    }
+
+    .role {
+      font-size: 14px;
+    }
+  }
+
+  .right-column {
+    .about-me-block {
+      padding: 20px;
+      max-width: 100%;
+      
+      .section-title {
+        font-size: 20px;
+      }
+      
+      p {
+        padding: 0 5px;
+      }
+    }
+  }
 }
-
-
