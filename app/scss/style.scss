@@ -17,6 +17,17 @@ body {
     pointer-events: none;
     z-index: -1;
   }
+  .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-title i {
+    color: #c40e0e;
+    font-size: 30px;
+}
 }
 
 .container-fluid {
@@ -164,6 +175,17 @@ body {
     text-transform: uppercase;
     color: #333;
   }
+ .section-title i {
+    color: white;
+    background-color: #c40e0e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
   
   .contact-info {
     display: flex;
@@ -192,6 +214,183 @@ body {
           
         }
       }
+    }
+  }
+}
+/* Адаптивність для планшетів */
+@media (max-width: 992px) {
+  body {
+    border-width: 40px;
+    
+    &::before {
+      top: -40px;
+      left: -40px;
+      right: -40px;
+      bottom: -40px;
+    }
+  }
+  
+  .left-column .red-block {
+    width: 400px;
+    height: 250px;
+    margin-left: -60px;
+    margin-bottom: -200px;
+  }
+  
+  .name-role {
+    width: 380px;
+    padding: 30px 20px 20px 80px;
+    
+    .name, .surname {
+      font-size: 50px;
+    }
+  }
+  
+  .header-block .photo {
+    max-width: 280px;
+    margin-bottom: 60px;
+  }
+  
+  .right-column .about-me-block {
+    margin-left: -20px;
+    padding-left: 40px;
+    
+    .section-title {
+      font-size: 24px;
+      padding: 30px 20px 0 20px;
+    }
+    
+    p {
+      font-size: 18px;
+      padding: 0 20px 30px 20px;
+    }
+  }
+  
+  .contact-section {
+    padding: 30px 0 30px 60px;
+    height: auto;
+    min-height: 200px;
+    
+    .contact-info {
+      flex-direction: column;
+      gap: 10px;
+      
+      .col-6 {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Адаптивність для мобільних */
+@media (max-width: 768px) {
+  body {
+    border-width: 20px;
+    
+    &::before {
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+    }
+  }
+  
+  .container-fluid {
+    flex-direction: column;
+  }
+  
+  .left-column {
+    min-height: auto;
+    
+    .red-block {
+      width: 100%;
+      max-width: 300px;
+      height: 200px;
+      margin: 20px auto -150px;
+      left: 0;
+      right: 0;
+    }
+  }
+  
+  .header-block {
+    text-align: center;
+    padding: 20px;
+    
+    .photo {
+      margin: 0 auto 40px;
+      border-radius: 20px;
+      max-width: 250px;
+    }
+  }
+  
+  .name-role {
+    width: 100%;
+    max-width: 320px;
+    margin: -100px auto 0;
+    padding: 25px 15px 15px 25px;
+    
+    .name, .surname {
+      font-size: 40px;
+    }
+    
+    .role {
+      font-size: 16px;
+    }
+  }
+  
+  .right-column .about-me-block {
+    margin-left: 0;
+    border-left: none;
+    border-top: 8px solid #d3d3d3;
+    padding: 20px;
+    
+    &::after {
+      display: none;
+    }
+    
+    .section-title {
+      font-size: 22px;
+      padding: 20px 10px 0 10px;
+    }
+    
+    p {
+      font-size: 16px;
+      padding: 0 10px 20px 10px;
+    }
+  }
+  
+  .contact-section {
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+    
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info li {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Додаткові корективи для дуже малих екранів */
+@media (max-width: 480px) {
+  .name-role {
+    .name, .surname {
+      font-size: 32px;
+    }
+  }
+  
+  .section-title {
+    font-size: 20px;
+    gap: 10px;
+    
+    i {
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
     }
   }
 }
