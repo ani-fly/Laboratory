@@ -1,0 +1,262 @@
+// Локальні змінні для about-me секції
+$about-me-white: white;
+$about-me-red: #c40e0e;
+$about-me-light-grey: #d3d3d3;
+$about-me-grey: rgb(69, 69, 69);
+$about-me-dark-grey: #454545;
+$about-me-very-light-grey: #f0f0f0;
+
+
+
+// Міксін для вертикальної лінії
+@mixin vertical-line($position: left, $color: $about-me-grey, $width: 3px, $top: 60px, $bottom: 40px) {
+  &::after {
+    content: '';
+    position: absolute;
+    #{$position}: 20px;
+    top: $top;
+    bottom: $bottom;
+    width: $width;
+    background-color: $color;
+  }
+}
+
+// Міксін для адаптивних розмірів
+@mixin responsive-text($desktop-size, $tablet-size, $mobile-size) {
+  font-size: $desktop-size;
+  
+  @media (max-width: 992px) {
+    font-size: $tablet-size;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: $mobile-size;
+  }
+}
+
+// Міксін для адаптивних відступів
+@mixin responsive-padding($desktop-padding, $tablet-padding, $mobile-padding) {
+  padding: $desktop-padding;
+  
+  @media (max-width: 992px) {
+    padding: $tablet-padding;
+  }
+  
+  @media (max-width: 768px) {
+    padding: $mobile-padding;
+  }
+}
+
+// Placeholder для наслідування
+%base-about-me-block {
+  background: $about-me-white;
+  position: relative;
+}
+
+%about-me-text-content {
+  margin: 0;
+  line-height: 1.6;
+  text-align: center;
+}
+
+// Основні стилі з вкладеністю
+.about-me-block {
+  @extend %base-about-me-block;
+  
+  // Математичні операції для розмірів
+  padding: 30px;
+  border-left: 8px solid $about-me-light-grey;
+  margin-left: -40px;
+  padding-left: 80px;
+  margin-bottom: -20px;
+  
+  // Використання міксіну для вертикальної лінії
+  @include vertical-line(
+    left, 
+    $about-me-grey, 
+    3px, 
+    60px,
+    40px
+  );
+
+  .section-title {
+    text-align: center;
+    font-weight: bold;
+    
+    // Математичні операції для розміру шрифту
+    @include responsive-text(
+      35px,   // desktop
+      28px,   // tablet  
+      24px    // mobile
+    );
+    
+    margin-bottom: 0;
+    text-transform: uppercase;
+    
+    // Математичні операції для відступів
+    padding: 40px 40px 0 40px;
+
+    i {
+      color: $about-me-red;
+    }
+
+    // Адаптивність для заголовка
+    @media (max-width: 992px) {
+      padding: 30px 20px 0 20px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 20px 15px 0 15px;
+    }
+  }
+
+  p {
+    @extend %about-me-text-content;
+    
+    // Математичні операції
+    font-size: 20px;
+    padding: 0 40px 40px 40px;
+    text-align: justify;
+
+    // Адаптивність для параграфа
+    @media (max-width: 992px) {
+      font-size: 16px;
+      padding: 0 20px 30px 20px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      padding: 0 15px 20px 15px;
+    }
+  }
+
+  // Адаптивність з математичними операціями
+  @media (max-width: 992px) {
+    padding: 30px;
+    margin-left: -20px;
+    padding-left: 40px;
+    margin-bottom: -15px;
+
+    &::after {
+      left: 15px;
+      top: 50px;
+      bottom: 30px;
+      width: 2px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    margin-left: 0;
+    padding-left: 40px;
+    margin-bottom: 0;
+    border-left: none;
+    border-top: 4px solid $about-me-light-grey;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 15px;
+    padding-left: 30px;
+
+    .section-title {
+      font-size: 22px;
+      padding: 15px 10px 0 10px;
+    }
+
+    p {
+      font-size: 13px;
+      padding: 0 10px 15px 10px;
+    }
+  }
+}
+
+// Демонстрація наслідування та додаткові варіації
+.about-me-block--alternative {
+  @extend .about-me-block;
+  
+  // Математичні операції для змінених розмірів
+  padding: 45px; // 30px * 1.5
+  padding-left: 70px; // 60px * 1.166
+  background: linear-gradient(135deg, $about-me-white 0%, $about-me-very-light-grey 100%);
+  
+  @include vertical-line(
+    left, 
+    $about-me-red, 
+    4px, 
+    65px, // 60px * 1.083
+    50px  // 40px * 1.25
+  );
+
+  .section-title {
+    font-size: 42px; // 35px * 1.2
+    
+    i {
+      background-color: $about-me-red;
+      border-radius: 50%;
+      padding: 5px;
+      color: $about-me-dark-grey;
+    }
+  }
+}
+
+.about-me-block--minimal {
+  @extend .about-me-block;
+  
+  // Математичні операції для мінімалістичного стилю
+  padding: 24px; // 30px * 0.8
+  padding-left: 48px; // 60px * 0.8
+  border-left-width: 4px; // 8px * 0.5
+
+  &::after {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 28px; // 35px * 0.8
+    padding: 24px 24px 0 24px; // 40px * 0.6
+  }
+
+  p {
+    font-size: 16px; // 20px * 0.8
+    padding: 0 24px 24px 24px; // 40px * 0.6
+  }
+}
+
+// Додатковий клас для демонстрації наслідування
+.about-me-content--highlighted {
+  @extend %about-me-text-content;
+  
+  // Математичні операції
+  font-size: 22px; // 20px * 1.1
+  background-color: $about-me-very-light-grey;
+  padding: 10px; // 30px / 3
+  border-radius: 5px; // 10px / 2
+  border-left: 6px solid $about-me-red; // 3px * 2
+  text-align: justify;
+}
+
+// Демонстрація математичних операцій з наслідуванням
+.about-me-block--dark {
+  @extend .about-me-block;
+  background-color: $about-me-dark-grey;
+  
+  .section-title {
+    color: $about-me-white !important;
+    
+    i {
+      color: $about-me-red;
+    }
+  }
+  
+  p {
+    color: $about-me-white;
+  }
+  
+  &::after {
+    background-color: $about-me-red;
+  }
+}

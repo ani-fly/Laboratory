@@ -1,0 +1,278 @@
+// Локальні змінні для contact секції
+$contact-white: white;
+$contact-red: #c40e0e;
+$contact-light-grey: #d3d3d3;
+$contact-grey: rgb(69, 69, 69);
+$contact-dark-grey: #454545;
+$contact-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$contact-padding-top: 40px;
+$contact-padding-bottom: 40px;
+$contact-padding-left: 90px;
+$contact-height: 220px;
+$contact-gap: 20px;
+$contact-title-size: 35px;
+$contact-text-size: 20px;
+
+// Міксіни для contact секції
+@mixin contact-section-styles($padding-top: 40px, $padding-bottom: 40px, $padding-left: 90px, $height: 220px) {
+  background-color: $contact-very-light-grey;
+  padding: $padding-top 0 $padding-bottom $padding-left;
+  margin: 0 -40px;
+  width: calc(100% + 80px);
+  height: $height;
+}
+
+@mixin contact-title-styles($font-size: 35px, $margin-bottom: 30px) {
+  text-align: center;
+  font-weight: bold;
+  font-size: $font-size;
+  margin-bottom: $margin-bottom;
+  text-transform: uppercase;
+  color: $contact-grey;
+  
+  i {
+    color: $contact-white;
+    background-color: $contact-red;
+    border-radius: 50%;
+    width: calc(#{$font-size} * 1.142); // 40px для 35px
+    height: calc(#{$font-size} * 1.142);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(#{$font-size} * 0.571); // 20px для 35px
+  }
+}
+
+@mixin contact-info-styles($gap: 20px) {
+  display: flex;
+  justify-content: space-between;
+  gap: $gap;
+}
+
+@mixin contact-column-styles($width: 48%, $gap: 20px) {
+  width: $width;
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: calc(#{$gap} - 5px); // 15px
+      padding-left: $gap; // 20px
+      position: relative;
+      line-height: 1.5;
+      list-style: square;
+      list-style-position: outside;
+      margin-left: calc(#{$gap} - 5px); // 15px
+      font-size: $contact-text-size;
+    }
+  }
+}
+
+@mixin contact-item-styles($margin-bottom: 15px, $padding-left: 20px, $margin-left: 15px, $font-size: 20px) {
+  margin-bottom: $margin-bottom;
+  padding-left: $padding-left;
+  position: relative;
+  line-height: 1.5;
+  list-style: square;
+  list-style-position: outside;
+  margin-left: $margin-left;
+  font-size: $font-size;
+}
+
+// Placeholder для наслідування
+%contact-base-section {
+  background-color: $contact-very-light-grey;
+  position: relative;
+}
+
+%contact-list-item {
+  position: relative;
+  line-height: 1.5;
+  list-style: square;
+  list-style-position: outside;
+}
+
+// Основні стилі contact секції
+.contact-section {
+  @extend %contact-base-section;
+  @include contact-section-styles(
+    $contact-padding-top,
+    $contact-padding-bottom,
+    $contact-padding-left,
+    $contact-height
+  );
+
+  // Адаптивність для планшетів
+  @media (max-width: 992px) {
+    @include contact-section-styles(
+      30px, // $contact-padding-top * 0.75
+      30px, // $contact-padding-bottom * 0.75
+      60px, // $contact-padding-left * 0.666
+      auto
+    );
+    min-height: 200px;
+  }
+
+  // Адаптивність для мобільних
+  @media (max-width: 768px) {
+    @include contact-section-styles(
+      20px, // $contact-padding-top * 0.5
+      20px, // $contact-padding-bottom * 0.5
+      20px, // $contact-padding-left * 0.222
+      auto
+    );
+    margin: 0;
+    width: 100%;
+  }
+
+  .section-title {
+    @include contact-title-styles(
+      $contact-title-size,
+      30px // margin-bottom
+    );
+
+    @media (max-width: 768px) {
+      @include contact-title-styles(
+        28px, // $contact-title-size * 0.8
+        30px
+      );
+    }
+
+    @media (max-width: 480px) {
+      @include contact-title-styles(
+        24px, // $contact-title-size * 0.685
+        25px
+      );
+    }
+  }
+
+  .contact-info {
+    @include contact-info-styles($contact-gap);
+
+    @media (max-width: 768px) {
+      @include contact-info-styles(15px); // $contact-gap * 0.75
+      flex-direction: column;
+    }
+
+    .col-6 {
+      @include contact-column-styles(48%, $contact-gap);
+
+      @media (max-width: 768px) {
+        @include contact-column-styles(100%, 15px);
+        
+        ul li {
+          @include contact-item-styles(
+            10px, // margin-bottom
+            15px, // padding-left
+            10px, // margin-left
+            16px  // font-size
+          );
+        }
+      }
+
+      @media (max-width: 480px) {
+        ul li {
+          @include contact-item-styles(
+            10px,
+            15px,
+            5px,
+            14px
+          );
+        }
+      }
+
+      ul {
+        li {
+          @extend %contact-list-item;
+          
+          // Специфічні стилі для різних типів контактів
+          &.email-item::before {
+            content: '✉️';
+            margin-right: 10px;
+          }
+          
+          &.phone-item::before {
+            content: '📱';
+            margin-right: 10px;
+          }
+          
+          &.location-item::before {
+            content: '📍';
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Демонстрація математичних операцій та наслідування
+.contact-section--compact {
+  @extend .contact-section;
+  
+  @include contact-section-styles(
+    40px,
+    40px,
+    40px, // $contact-padding-left * 0.444
+    180px // $contact-height * 0.818
+  );
+  
+  .section-title {
+    @include contact-title-styles(
+      28px, // $contact-title-size * 0.8
+      30px
+    );
+  }
+}
+
+.contact-info--vertical {
+  @include contact-info-styles(15px);
+  flex-direction: column;
+  
+  .col-6 {
+    @include contact-column-styles(100%, 15px);
+  }
+}
+
+// Додаткові варіації для демонстрації
+.contact-item--highlighted {
+  @extend %contact-list-item;
+  
+  @include contact-item-styles(20px, 25px, 20px, 22px);
+  background-color: $contact-white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border-left: 3px solid $contact-red;
+  
+  &::marker {
+    color: $contact-red;
+  }
+}
+
+.contact-section--dark {
+  @extend .contact-section;
+  background-color: $contact-dark-grey;
+  
+  .section-title {
+    color: $contact-white !important;
+    
+    i {
+      background-color: $contact-white;
+      color: $contact-dark-grey;
+    }
+  }
+  
+  .contact-info {
+    .col-6 ul li {
+      color: $contact-white;
+      
+      &::marker {
+        color: $contact-red;
+      }
+    }
+  }
+}

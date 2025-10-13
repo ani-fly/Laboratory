@@ -82,7 +82,15 @@ function serve() {
   gulp.watch(paths.js, js);
   gulp.watch(paths.images, images);
 }
-
+gulp.task('scss', function() {
+  return gulp.src('src/scss/**/*.scss')
+    .pipe(sass({
+      outputStyle: 'compressed',
+      quietDeps: true // Ігнорує попередження про застарілі функції
+    }).on('error', sabs.logError))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(browserSync.stream());
+});
 // Експорти
 exports.html = html;
 exports.scss = scss;

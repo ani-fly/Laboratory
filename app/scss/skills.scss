@@ -1,0 +1,331 @@
+// Локальні змінні для skills секції
+$skill-white: white;
+$skill-red: #c40e0e;
+$skill-light-grey: #d3d3d3;
+$skill-grey: rgb(69, 69, 69);
+$skill-dark-grey: #454545;
+$skill-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$skill-padding-bottom: 0;
+$skill-padding-top: 30px;
+$skill-line-top-width: 560px;
+$skill-line-side-width: 90px;
+$skill-line-height: 6px;
+$skill-title-size: 35px;
+$skill-title-margin-left: 150px;
+$skill-container-max-width: 500px;
+$skill-container-gap: 25px;
+$skill-item-padding-bottom: 42px; // Зменшив знизу
+$skill-name-size: 16px;
+$skill-bar-height: 3px;
+$skill-bar-margin-top: 40px; // Збільшив зверху
+$skill-bar-margin-bottom: 5px; // Додав менший відступ знизу
+$skill-dot-size: 12px;
+
+// Міксіни для skills секції
+@mixin decorative-lines($top-color: $skill-dark-grey, $side-color: $skill-red, $top-width: 560px, $side-width: 90px) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: $top-width;
+    height: 6px;
+    background: $top-color;
+    z-index: 11;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    bottom: 0;
+    left: -40px;
+    width: $side-width;
+    background: $side-color;
+    z-index: 10;
+  }
+}
+
+@mixin slanted-background($color: $skill-very-light-grey, $width: 560px) {
+  .container::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -40px;
+    right: 0;
+    bottom: 0;
+    background: $color;
+    clip-path: polygon(0 0, #{$width} 0, 100% 100%, 0 100%);
+    z-index: 1;
+  }
+}
+
+@mixin skill-progress-dot($size: 12px, $color: $skill-red) {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  width: $size;
+  height: $size;
+  background: $color;
+  z-index: 3;
+  border-radius: 0;
+}
+
+@mixin skill-bar-styles($height: 3px, $margin-top: 20px, $margin-bottom: 5px) {
+  width: 50%; // Зменшена ширина на половину
+  height: $height;
+  background: #d9d9d9;
+  border-radius: 0;
+  position: relative;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+// Placeholder для наслідування
+%skill-base-styles {
+  background: transparent;
+  position: relative;
+  z-index: 3;
+}
+
+%skill-text-styles {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 0;
+}
+
+// Основні стилі skills секції
+.skills-section {
+  position: relative;
+  overflow: visible;
+  padding-bottom: $skill-padding-bottom;
+  padding-top: $skill-padding-top;
+  background: $skill-white;
+
+  @include decorative-lines;
+  @include slanted-background;
+
+  // Адаптивність для планшетів
+  @media (max-width: 992px) {
+    @include decorative-lines($skill-dark-grey, $skill-red, 400px, 60px);
+    @include slanted-background($skill-very-light-grey, 400px);
+  }
+
+  // Адаптивність для мобільних
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    &::after {
+      left: 20px;
+      width: 4px;
+    }
+
+    @include decorative-lines($skill-dark-grey, $skill-red, 300px, 4px);
+    @include slanted-background($skill-very-light-grey, 300px);
+  }
+
+  // Адаптивність для малих екранів
+  @media (max-width: 480px) {
+    @include slanted-background($skill-very-light-grey, 200px);
+  }
+
+  .section-title_container {
+    @extend %skill-base-styles;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    font-weight: bold;
+    font-size: $skill-title-size;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    margin-left: $skill-title-margin-left;
+    margin-top: 40px;
+    color: $skill-red;
+
+    i {
+      color: $skill-grey;
+      background-color: $skill-very-light-grey;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      @include flex-center;
+      font-size: 30px;
+    }
+
+    // Адаптивність
+    @media (max-width: 768px) {
+      font-size: 24px;
+      margin-bottom: 30px;
+      margin-left: 50px;
+
+      i {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      font-size: 22px;
+      margin-left: 40px;
+
+      i {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .skills-container {
+    @extend %skill-base-styles;
+    display: flex;
+    flex-direction: column;
+    gap: $skill-container-gap;
+    max-width: $skill-container-max-width;
+    margin: 0 auto;
+    padding: 0 20px;
+    left: 80px;
+
+    @media (max-width: 768px) {
+      gap: 20px;
+      padding: 0 40px;
+      max-width: 400px;
+      left: 40px;
+    }
+
+    @media (max-width: 480px) {
+      left: 20px;
+      padding: 0 20px;
+    }
+
+    .skill-item {
+      background: transparent;
+      padding: 20px 0 $skill-item-padding-bottom 0;
+
+      .skill-header {
+        display: block;
+        margin-bottom: 0;
+        padding: 0;
+        background: transparent;
+
+        .skill-name {
+          @extend %skill-text-styles;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          font-size: $skill-name-size;
+          font-weight: 600;
+          color: #333;
+
+          &::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #666;
+            display: inline-block;
+            flex-shrink: 0;
+            border-radius: 2px;
+          }
+
+          @media (max-width: 768px) {
+            font-size: 14px;
+            
+            &::before {
+              width: 10px;
+              height: 10px;
+            }
+          }
+
+          @media (max-width: 480px) {
+            font-size: 13px;
+            gap: 12px;
+            
+            &::before {
+              width: 8px;
+              height: 8px;
+            }
+          }
+        }
+      }
+
+      .skill-bar {
+        @include skill-bar-styles;
+        position: relative;
+
+        @media (max-width: 768px) {
+          @include skill-bar-styles(2px, 15px, 3px);
+          width: 50%; // Залишаємо 50% ширини і на мобільних
+        }
+
+        @media (max-width: 480px) {
+          margin-top: 15px;
+          margin-bottom: 3px;
+          width: 50%; // Залишаємо 50% ширини і на малих екранах
+        }
+
+        .skill-progress {
+          height: 100%;
+          background: $skill-red;
+          border-radius: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 50%;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          z-index: 2;
+        }
+
+        .progress-center-dot {
+          @include skill-progress-dot;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+
+          @media (max-width: 768px) {
+            @include skill-progress-dot(10px, $skill-red);
+          }
+
+          @media (max-width: 480px) {
+            @include skill-progress-dot(8px, $skill-red);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Специфічні класи для кожного skill з різним рівнем заповнення
+.skill-item--word .skill-progress { width: 50% !important; }
+.skill-item--illustrator .skill-progress { width: 50% !important; }
+.skill-item--powerpoint .skill-progress { width: 50% !important; }
+.skill-item--photoshop .skill-progress { width: 50% !important; }
+
+// Гарантуємо, що всі елементи видимі
+.skills-section * {
+  box-sizing: border-box;
+}
+
+.skill-bar,
+.skill-progress,
+.progress-center-dot {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

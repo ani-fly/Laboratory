@@ -1,0 +1,349 @@
+// Локальні змінні для header секції
+$header-white: white;
+$header-red: #c40e0e;
+$header-light-grey: #d3d3d3;
+$header-grey: rgb(69, 69, 69);
+$header-dark-grey: #454545;
+$header-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$header-red-block-width: 560px;
+$header-red-block-height: 330px;
+$header-red-block-margin-bottom: -260px;
+$header-red-block-margin-left: -123px;
+$header-red-block-margin-top: 0px;
+
+$header-photo-max-width: 350px;
+$header-photo-border-width: 8px;
+$header-photo-margin-top: -50px;
+$header-photo-margin-bottom: 80px;
+
+$header-name-role-width: 457px;
+$header-name-role-padding-top: 40px;
+$header-name-role-padding-right: 30px;
+$header-name-role-padding-bottom: 30px;
+$header-name-role-padding-left: 100px;
+$header-name-role-margin-top: -120px;
+$header-name-role-margin-left: -38px;
+
+$header-name-size: 70px;
+$header-role-size: 18px;
+
+// Міксіни для header секції
+@mixin red-block-styles($width: 560px, $height: 330px, $margin-bottom: -260px, $margin-left: -100px, $margin-top: 30px) {
+  width: $width;
+  height: $height;
+  background-color: $header-red;
+  margin-bottom: $margin-bottom;
+  margin-left: $margin-left;
+  margin-top: $margin-top;
+}
+
+@mixin photo-styles($max-width: 350px, $border-width: 8px, $border-radius: 20px 0 0 20px, $margin-top: 0, $margin-bottom: 80px) {
+  width: 100%;
+  max-width: $max-width;
+  border: $border-width solid $header-white;
+  border-radius: $border-radius;
+  margin: $margin-top 0 $margin-bottom auto;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+
+@mixin name-role-styles($width: 477px, $padding-top: 40px, $padding-right: 30px, $padding-bottom: 30px, $padding-left: 100px, $margin-top: -120px, $margin-left: -38px) {
+  color: $header-white;
+  text-align: left;
+  background-color: $header-grey;
+  padding: $padding-top $padding-right $padding-bottom $padding-left;
+  margin: $margin-top 0 0;
+  width: $width;
+  margin-left: $margin-left;
+  position: relative;
+  z-index: 2;
+  min-height: 150px;
+  box-sizing: border-box;
+  border: 8px solid $header-white;
+}
+
+@mixin name-styles($font-size: 70px, $font-weight: normal, $line-height: 0.9) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  margin: 0;
+  color: $header-white;
+  line-height: $line-height;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@mixin role-styles($font-size: 18px, $margin-top: 10px) {
+  font-size: $font-size;
+  font-style: italic;
+  margin: $margin-top 0 0;
+  color: $header-white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: normal;
+}
+
+// Placeholder для наслідування
+%base-column {
+  padding: 0;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  //min-height: 100vh;
+  overflow: hidden;
+}
+
+%header-block-base {
+  text-align: right;
+  position: relative;
+}
+
+%text-uppercase {
+  text-transform: uppercase;
+  color: $header-white;
+}
+
+// Основні стилі header секції
+.left-column {
+  @extend %base-column;
+
+  .red-block {
+    @include red-block-styles(
+      $header-red-block-width,
+      $header-red-block-height,
+      $header-red-block-margin-bottom,
+      $header-red-block-margin-left,
+      $header-red-block-margin-top
+    );
+
+    // Адаптивність
+    @media (max-width: 992px) {
+      @include red-block-styles(
+        400px,
+        250px,
+        -200px,
+        -60px,
+        30px
+      );
+    }
+
+    @media (max-width: 768px) {
+      @include red-block-styles(
+        calc(100% - 40px),
+        200px,
+        -150px,
+        auto,
+        20px
+      );
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+    }
+  }
+}
+
+.header-block {
+  @extend %header-block-base;
+  padding: 30px 0 30px 30px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .photo {
+    @include photo-styles(
+      $header-photo-max-width,
+      $header-photo-border-width,
+      20px 0 0 20px,
+      $header-photo-margin-top,
+      $header-photo-margin-bottom
+    );
+
+    @media (max-width: 992px) {
+      @include photo-styles(
+        280px,
+        6px,
+        15px 0 0 15px,
+        -60px,
+        60px
+      );
+    }
+
+    @media (max-width: 768px) {
+      @include photo-styles(
+        250px,
+        6px,
+        20px,
+        0,
+        30px
+      );
+      margin: 0 auto 30px;
+    }
+  }
+}
+
+.name-role {
+  @include name-role-styles(
+    $header-name-role-width,
+    $header-name-role-padding-top,
+    $header-name-role-padding-right,
+    $header-name-role-padding-bottom,
+    $header-name-role-padding-left,
+    $header-name-role-margin-top,
+    $header-name-role-margin-left
+  );
+
+  @media (max-width: 992px) {
+    @include name-role-styles(
+      380px,
+      40px,
+      20px,
+      20px,
+      80px,
+      -100px,
+      -30px
+    );
+  }
+
+  @media (max-width: 768px) {
+    @include name-role-styles(
+      calc(100% - 40px),
+      20px,
+      15px,
+      15px,
+      20px,
+      -100px,
+      auto
+    );
+    margin: -100px auto 0;
+    text-align: center;
+  }
+
+  .name {
+    @include name-styles(
+      $header-name-size,
+      normal,
+      0.9
+    );
+    @extend %text-uppercase;
+
+    @media (max-width: 992px) {
+      @include name-styles(
+        50px,
+        normal,
+        0.9
+      );
+    }
+
+    @media (max-width: 768px) {
+      @include name-styles(
+        40px,
+        normal,
+        1
+      );
+    }
+
+    @media (max-width: 480px) {
+      @include name-styles(
+        32px,
+        normal,
+        1
+      );
+    }
+  }
+
+  .surname {
+    @include name-styles(
+      $header-name-size,
+      bold,
+      0.9
+    );
+    @extend %text-uppercase;
+
+    @media (max-width: 992px) {
+      @include name-styles(
+        50px,
+        bold,
+        0.9
+      );
+    }
+
+    @media (max-width: 768px) {
+      @include name-styles(
+        40px,
+        bold,
+        1
+      );
+    }
+
+    @media (max-width: 480px) {
+      @include name-styles(
+        32px,
+        bold,
+        1
+      );
+    }
+  }
+
+  .role {
+    @include role-styles(
+      $header-role-size,
+      10px
+    );
+    @extend %text-uppercase;
+
+    @media (max-width: 768px) {
+      @include role-styles(
+        16px,
+        10px
+      );
+    }
+  }
+}
+
+// Демонстрація математичних операцій та наслідування
+.name-role--alternative {
+  @extend .name-role;
+  
+  @include name-role-styles(
+    500px, // $header-name-role-width * 1.048
+    50px,  // $header-name-role-padding-top * 1.25
+    50px,  // $header-name-role-padding-right * 1.666
+    50px,  // $header-name-role-padding-bottom * 1.666
+    150px, // $header-name-role-padding-left * 1.5
+    -150px, // $header-name-role-margin-top * 1.25
+    -50px  // $header-name-role-margin-left * 1.315
+  );
+  
+  background-color: $header-red;
+  
+  .name,
+  .surname {
+    font-size: 60px; // $header-name-size * 0.857
+  }
+}
+
+.header-block--centered {
+  @extend .header-block;
+  text-align: center;
+  
+  .photo {
+    margin: -80px auto 80px;
+    border-radius: 20px;
+  }
+}
+
+// Додаткові варіації для демонстрації
+.red-block--large {
+  @include red-block-styles(
+    600px, // $header-red-block-width * 1.071
+    400px, // $header-red-block-height * 1.212
+    -300px, // $header-red-block-margin-bottom * 1.153
+    -100px,
+    60px   // $header-red-block-margin-top * 2
+  );
+}

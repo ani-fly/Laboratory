@@ -1,0 +1,235 @@
+// Локальні змінні для references секції
+$reference-white: white;
+$reference-red: #c40e0e;
+$reference-light-grey: #d3d3d3;
+$reference-grey: rgb(69, 69, 69);
+$reference-dark-grey: #454545;
+$reference-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$reference-padding-right: 80px;
+$reference-container-max-width: 1200px;
+$reference-container-padding: 0 40px;
+$reference-title-size: 35px;
+$reference-title-margin-bottom: 20px;
+$reference-grid-max-width: 600px;
+$reference-grid-gap: 30px;
+$reference-item-padding-right: 20px;
+$reference-name-size: 20px;
+$reference-address-size: 16px;
+$reference-dot-size: 8px;
+
+// Міксіни для references секції
+@mixin reference-dot($size: 8px, $color: $reference-grey, $position: right) {
+  &::before {
+    content: '';
+    position: absolute;
+    
+    @if $position == right {
+      top: 8px;
+      right: 0;
+    } @else {
+      top: 0;
+      right: 50%;
+      transform: translateX(50%);
+    }
+    
+    width: $size;
+    height: $size;
+    background: $color;
+    border-radius: 50%;
+  }
+}
+
+@mixin reference-text-styles($type: 'name') {
+  @if $type == 'name' {
+    font-size: $reference-name-size;
+    font-weight: bold;
+    color: $reference-red;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+  } @else if $type == 'address' {
+    font-size: $reference-address-size;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@mixin responsive-reference-layout($align: flex-end) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align;
+  gap: $reference-grid-gap;
+  max-width: $reference-grid-max-width;
+  
+  @if $align == flex-end {
+    margin-left: auto;
+  } @else {
+    margin-left: 0;
+  }
+}
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+// Міксін для адаптивних стилів замість @extend
+@mixin reference-responsive-styles {
+  text-align: center;
+  padding-right: 0;
+  padding-top: 15px;
+}
+
+// Placeholder для наслідування (тільки для використання поза медіа-запитами)
+%reference-base-item {
+  position: relative;
+  text-align: right;
+}
+
+// Основні стилі references секції
+.references-section {
+  padding: 0 $reference-padding-right 0 0;
+  background: $reference-white;
+  position: relative;
+
+  .container {
+    max-width: $reference-container-max-width;
+    margin: 0 auto;
+    padding: $reference-container-padding;
+
+    @media (max-width: 480px) {
+      padding: 0 20px;
+    }
+  }
+
+  .section-title {
+    @include flex-center;
+    gap: 15px;
+    text-align: center;
+    font-size: $reference-title-size;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: $reference-title-margin-bottom;
+    color: $reference-grey;
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+
+  .references-grid {
+    @include responsive-reference-layout(flex-end);
+
+    @media (max-width: 768px) {
+      @include responsive-reference-layout(center);
+      max-width: 100%;
+    }
+  }
+
+  .reference-item {
+    @extend %reference-base-item;
+    padding-right: $reference-item-padding-right;
+
+    @include reference-dot;
+
+    @media (max-width: 768px) {
+      // Використовуємо міксін замість @extend для медіа-запитів
+      @include reference-responsive-styles;
+      @include reference-dot($reference-dot-size, $reference-grey, center);
+    }
+
+    .reference-name {
+      @include reference-text-styles('name');
+
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 16px;
+      }
+    }
+
+    .reference-address {
+      @include reference-text-styles('address');
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 13px;
+      }
+    }
+  }
+
+  // Адаптивність
+  @media (max-width: 768px) {
+    padding: 40px 0 60px 0;
+  }
+}
+
+// Демонстрація наслідування поза медіа-запитами
+.reference-item--highlighted {
+  @extend .reference-item;
+  
+  .reference-name {
+    color: $reference-dark-grey;
+    font-size: 22px;
+  }
+  
+  &::before {
+    background: $reference-red;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.references-grid--centered {
+  @include responsive-reference-layout(center);
+  margin: 0 auto;
+  
+  .reference-item {
+    text-align: center;
+    padding-right: 0;
+    
+    @include reference-dot($reference-dot-size, $reference-grey, center);
+  }
+}
+
+// Додатковий клас для демонстрації наслідування
+.reference-item--special {
+  @extend %reference-base-item;
+  
+  padding-right: 25px;
+  background-color: $reference-very-light-grey;
+  border-radius: 8px;
+  padding: 15px 20px;
+  
+  @include reference-dot(10px, $reference-red);
+  
+  .reference-name {
+    @include reference-text-styles('name');
+    font-size: 22px;
+    color: $reference-dark-grey;
+  }
+  
+  .reference-address {
+    @include reference-text-styles('address');
+    font-size: 17px;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,297 @@
+// Локальні змінні для experience секції
+$experience-white: white;
+$experience-red: #c40e0e;
+$experience-light-grey: #d3d3d3;
+$experience-grey: rgb(69, 69, 69);
+$experience-dark-grey: #454545;
+$experience-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$experience-padding-bottom: 40px;
+$experience-title-size: 35px;
+$experience-title-margin-left: 90px;
+$experience-title-margin-bottom: 50px;
+$experience-job-title-size: 24px;
+$experience-company-size: 20px;
+$experience-description-size: 20px;
+$experience-period-size: 18px;
+
+// Міксіни для experience секції
+@mixin timeline-styles($left: 40px, $width: 25px, $height: calc(100% - 40px)) {
+  &::before {
+    content: '';
+    position: absolute;
+    left: $left;
+    top: 0;
+    bottom: 0;
+    width: $width;
+    height: $height;
+    background: $experience-grey;
+    border-radius: calc(#{$width} / 2.5); // 10px
+  }
+}
+
+@mixin timeline-dot($left: 47px, $top: 10px, $size: 10px) {
+  &::before {
+    content: '';
+    position: absolute;
+    left: $left;
+    top: $top;
+    width: $size;
+    height: $size;
+    background: $experience-white;
+    z-index: 2;
+  }
+}
+
+@mixin section-title-experience($margin-left: 90px, $margin-bottom: 50px) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  font-weight: bold;
+  font-size: $experience-title-size;
+  text-transform: uppercase;
+  margin-bottom: $margin-bottom;
+  margin-left: $margin-left;
+  color: $experience-red;
+  
+  span {
+    border-bottom: 3px solid $experience-grey;
+    padding-bottom: 5px;
+  }
+}
+
+@mixin job-title-styles($font-size: 24px) {
+  font-size: $font-size;
+  font-weight: bold;
+  color: $experience-red;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+@mixin company-period-styles($gap: 10px) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $gap;
+}
+
+@mixin company-styles($font-size: 20px) {
+  font-weight: bold;
+  color: #666;
+  font-size: $font-size;
+}
+
+@mixin period-styles($padding-vertical: 4px, $padding-horizontal: 12px) {
+  padding: $padding-vertical $padding-horizontal;
+  //border-radius: 20px;
+  font-size: $experience-period-size;
+  font-weight: bold;
+  color: #666;
+}
+
+@mixin job-description-styles($font-size: 20px) {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: $font-size;
+}
+
+// Placeholder для наслідування
+%experience-base-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+%timeline-element {
+  position: relative;
+  padding-left: 100px;
+}
+
+// Основні стилі experience секції
+.experience-section {
+  padding: 0 0 $experience-padding-bottom 0;
+
+  .section-title {
+    @include section-title-experience(
+      $experience-title-margin-left,
+      $experience-title-margin-bottom
+    );
+
+    i {
+      color: $experience-grey;
+    }
+
+    // Адаптивність
+    @media (max-width: 768px) {
+      @include section-title-experience(
+        40px,
+        30px
+      );
+      font-size: 24px;
+    }
+
+    @media (max-width: 480px) {
+      @include section-title-experience(
+        20px,
+        30px
+      );
+      font-size: 22px;
+    }
+  }
+
+  .experience-timeline {
+    position: relative;
+    padding: 40px 0 0 0;
+    margin-left: 40px;
+    
+    @include timeline-styles(
+      40px,
+      25px,
+      calc(100% - 40px)
+    );
+
+    @media (max-width: 768px) {
+      margin-left: 20px;
+      @include timeline-styles(
+        20px,
+        15px,
+        calc(100% - 20px)
+      );
+    }
+  }
+
+  .experience-item {
+    @extend %experience-base-item;
+    @extend %timeline-element;
+    
+    @include timeline-dot(
+      47px,
+      15px,
+      10px
+    );
+
+    @media (max-width: 768px) {
+      padding-left: 80px;
+      
+      @include timeline-dot(
+        32px,
+        15px,
+        8px
+      );
+    }
+
+    .experience-header {
+      margin-bottom: 15px;
+    }
+
+    .job-title {
+      @include job-title-styles($experience-job-title-size);
+
+      @media (max-width: 768px) {
+        @include job-title-styles(20px);
+      }
+
+      @media (max-width: 480px) {
+        @include job-title-styles(16px);
+      }
+    }
+
+    .company-period {
+      @include company-period-styles(10px);
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .company {
+        @include company-styles($experience-company-size);
+
+        @media (max-width: 768px) {
+          @include company-styles(16px);
+        }
+      }
+
+      .period {
+        @include period-styles(4px, 12px);
+        //background-color: $experience-very-light-grey;
+        //color: $experience-dark-grey;
+
+        @media (max-width: 768px) {
+          @include period-styles(3px, 10px);
+          font-size: 14px;
+        }
+      }
+    }
+
+    .job-description {
+      @include job-description-styles($experience-description-size);
+
+      @media (max-width: 768px) {
+        @include job-description-styles(16px);
+      }
+
+      @media (max-width: 480px) {
+        @include job-description-styles(14px);
+      }
+    }
+  }
+}
+
+// Демонстрація математичних операцій та наслідування
+.experience-item--highlighted {
+  @extend .experience-item;
+  
+  @include timeline-dot(47px, 10px, 12px);
+  
+  .job-title {
+    @include job-title-styles(28px);
+    color: $experience-dark-grey;
+  }
+  
+  .period {
+    background-color: $experience-red;
+    color: $experience-white;
+  }
+}
+
+.experience-timeline--alternative {
+  @include timeline-styles(
+    20px,
+    15px,
+    calc(100% - 20px)
+  );
+  
+  &::before {
+    background: linear-gradient(to bottom, $experience-red, $experience-grey);
+  }
+}
+
+// Додаткові варіації для демонстрації
+.section-title--experience-compact {
+  @include section-title-experience(
+    40px,
+    30px
+  );
+  
+  font-size: 28px;
+  
+  span {
+    border-bottom-width: 2px;
+    padding-bottom: 2.5px;
+  }
+}
+
+.company-period--stacked {
+  @include company-period-styles(10px);
+  flex-direction: column;
+  align-items: flex-start;
+  
+  .period {
+    align-self: flex-start;
+  }
+}

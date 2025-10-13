@@ -6,10 +6,11 @@
   <title>John Parker</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.min.css">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="resume-container">
+  <div class="main-container">
   <div class="row">
 
     <div class="col-12 col-md-4 left-column">
@@ -30,7 +31,29 @@
     </div>
 
   </div>
-</div>
 
+<div class="container-fluid">
+  <div class="row g-0"> <!-- Додано g-0 для видалення проміжків -->
+    <!-- Ліва колонка -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="experience-block flex-grow-1">
+        @@include('html/experience.html')
+      </div>
+      <div class="skills-block flex-grow-1">
+        @@include('html/skills.html')
+      </div>
+    </div>
+
+    <!-- Права колонка -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="references-block flex-grow-1">
+        @@include('html/references.html')
+      </div>
+      <div class="education-block flex-grow-1">
+        @@include('html/education.html')
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,499 @@
+// Об'єднання education.scss та hobbies.scss
+
+// Локальні змінні для education секції
+$education-white: white;
+$education-red: #c40e0e;
+$education-light-grey: #d3d3d3;
+$education-grey: rgb(69, 69, 69);
+$education-dark-grey: #454545;
+$education-very-light-grey: #f0f0f0;
+
+// Розміри та відступи
+$education-padding-top: 40px;
+$education-padding-bottom: 300px; // Збільшено для хобі
+$education-padding-sides: 40px;
+$education-title-size: 35px;
+$education-degree-size: 24px;
+$education-university-size: 20px;
+$education-description-size: 20px;
+$education-period-size: 18px;
+
+// Локальні змінні для hobbies секції
+$hobby-red: #c40e0e;
+$hobby-grey: rgb(69, 69, 69);
+$hobby-dark-grey: #454545;
+
+// Розміри та відступи для хобі
+$hobby-title-margin-top: 180px;
+$hobby-title-margin-bottom: 60px;
+$hobby-grid-max-width: 500px;
+$hobby-grid-margin-right: 80px;
+$hobby-grid-gap-vertical: 25px;
+$hobby-grid-gap-horizontal: 40px;
+$hobby-item-padding-vertical: 8px;
+$hobby-item-padding-horizontal: 15px;
+$hobby-item-gap: 10px;
+$hobby-name-size: 20px;
+$hobby-dot-size: 8px;
+
+// Міксіни для education секції
+@mixin education-lines($top-color: $education-dark-grey, $side-color: $education-red, $top-width: 560px, $side-width: 50px) {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -40px;
+    width: $top-width;
+    height: 6px;
+    background: $top-color;
+    z-index: 11;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: $side-width;
+    background: $side-color;
+    z-index: 2;
+    height: 100%;
+  }
+}
+
+@mixin education-timeline-styles($right: 40px, $width: 25px) {
+  &::before {
+    content: '';
+    position: absolute;
+    right: $right;
+    top: 0;
+    bottom: 0;
+    width: $width;
+    background: $education-grey;
+    border-radius: calc(#{$width} / 2.5);
+  }
+}
+
+@mixin education-dot($right: 47px, $top: 10px, $size: 10px) {
+  &::before {
+    content: '';
+    position: absolute;
+    right: $right;
+    top: $top;
+    width: $size;
+    height: $size;
+    background: $education-white;
+    border-radius: 50%;
+    z-index: 2;
+  }
+}
+
+@mixin section-title-education($margin-left: 80px, $margin-bottom: 40px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-weight: bold;
+  font-size: $education-title-size;
+  text-transform: uppercase;
+  margin-bottom: $margin-bottom;
+  color: $education-red;
+  text-align: center;
+  position: relative;
+  left: $margin-left;
+  
+  span {
+    border-bottom: 3px solid $education-grey;
+    padding-bottom: 5px;
+    z-index: 2;
+  }
+  
+  .fas.fa-graduation-cap {
+    color: $education-dark-grey !important;
+    order: 2;
+    margin-left: 10px;
+  }
+}
+
+@mixin degree-styles($font-size: 24px) {
+  font-size: $font-size;
+  font-weight: bold;
+  color: $education-red;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+@mixin education-period-styles($gap: 10px) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $gap;
+  flex-direction: row-reverse;
+}
+
+@mixin university-styles($font-size: 20px) {
+  font-weight: bold;
+  color: #666;
+  font-size: $font-size;
+}
+
+@mixin education-period-tag($padding-vertical: 4px, $padding-horizontal: 12px) {
+  padding: $padding-vertical $padding-horizontal;
+  border-radius: 20px;
+  font-size: $education-period-size;
+  font-weight: bold;
+  background: transparent;
+  color: #666;
+}
+
+@mixin education-description-styles($font-size: 20px) {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: $font-size;
+  text-align: right;
+}
+
+// Міксіни для hobbies секції
+@mixin hobby-dot($size: 8px, $color: $hobby-red) {
+  &::after {
+    content: '';
+    width: $size;
+    height: $size;
+    background: $color;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: block;
+  }
+}
+
+@mixin hobby-grid-layout($max-width: 500px, $margin-right: 80px, $gap-vertical: 25px, $gap-horizontal: 40px) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-vertical $gap-horizontal;
+  max-width: $max-width;
+  margin-right: $margin-right;
+  position: relative;
+  z-index: 3;
+  right: calc(#{$gap-horizontal} / 2);
+  justify-content: flex-end;
+}
+
+@mixin hobby-item-styles($padding-vertical: 8px, $padding-horizontal: 15px, $gap: 10px) {
+  display: flex;
+  align-items: center;
+  gap: $gap;
+  padding: $padding-vertical $padding-horizontal;
+  background: transparent;
+  position: relative;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@mixin hobby-text-styles($font-size: 20px, $text-align: right) {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: $font-size;
+  text-align: $text-align;
+  font-weight: 600;
+  text-transform: uppercase;
+  order: -1;
+}
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+// Placeholder для наслідування
+%education-base-item {
+  position: relative;
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+%education-timeline-element {
+  position: relative;
+  padding-right: 100px;
+}
+
+%hobby-base-item {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  position: relative;
+}
+
+// Основні стилі об'єднаної секції
+.education-section {
+  padding: $education-padding-top 0 $education-padding-bottom 0;
+  position: relative;
+  background: $education-white;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  @include education-lines($education-dark-grey, $education-red, 560px, 50px);
+
+  // Адаптивність для планшетів
+  @media (max-width: 992px) {
+    @include education-lines($education-dark-grey, $education-red, 400px, 60px);
+  }
+
+  // Адаптивність для мобільних
+  @media (max-width: 768px) {
+    padding: 30px 0 100px 0;
+    
+    @include education-lines($education-dark-grey, $education-red, 300px, 70px);
+    
+    &::after {
+      right: -20px;
+    }
+  }
+
+  // Адаптивність для малих екранів
+  @media (max-width: 480px) {
+    padding: 20px 0 80px 0;
+    
+    @include education-lines($education-dark-grey, $education-red, 200px, 50px);
+    
+    &::after {
+      right: -15px;
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $education-padding-sides 100px $education-padding-sides;
+    position: relative;
+    z-index: 3;
+
+    @media (max-width: 768px) {
+      padding: 0 20px 40px 20px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0 15px 30px 15px;
+    }
+  }
+
+  // Стилі для заголовка освіти
+  .section-title {
+    @include section-title-education(80px, 40px);
+
+    @media (max-width: 768px) {
+      @include section-title-education(40px, 30px);
+      font-size: 28px;
+    }
+
+    @media (max-width: 480px) {
+      @include section-title-education(20px, 25px);
+      font-size: 24px;
+    }
+
+    // Стилі для заголовка хобі
+    &.hobbies-title {
+      margin-top: $hobby-title-margin-top;
+      margin-bottom: $hobby-title-margin-bottom;
+      left: 80px;
+      
+      @media (max-width: 768px) {
+        margin-top: 60px;
+        margin-bottom: 30px;
+        left: 40px;
+      }
+
+      @media (max-width: 480px) {
+        margin-top: 50px;
+        margin-bottom: 25px;
+        left: 20px;
+      }
+    }
+  }
+
+  // Стилі для таймлайну освіти
+  .education-timeline {
+    position: relative;
+    padding: 30px 0 20px 0;
+    margin-right: 40px;
+    
+    @include education-timeline-styles(40px, 25px);
+
+    @media (max-width: 768px) {
+      margin-right: 20px;
+      padding: 20px 0 15px 0;
+      
+      @include education-timeline-styles(20px, 20px);
+    }
+
+    @media (max-width: 480px) {
+      margin-right: 15px;
+      padding: 15px 0 10px 0;
+    }
+  }
+
+  .education-item {
+    @extend %education-base-item;
+    @extend %education-timeline-element;
+    
+    @include education-dot(47px, 10px, 10px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      padding-right: 60px;
+      margin-bottom: 25px;
+      
+      @include education-dot(32px, 10px, 8px);
+    }
+
+    @media (max-width: 480px) {
+      padding-right: 50px;
+      margin-bottom: 20px;
+    }
+
+    .education-header {
+      margin-bottom: 12px;
+    }
+
+    .degree {
+      @include degree-styles($education-degree-size);
+
+      @media (max-width: 768px) {
+        @include degree-styles(20px);
+      }
+
+      @media (max-width: 480px) {
+        @include degree-styles(16px);
+      }
+    }
+
+    .education-period {
+      @include education-period-styles(10px);
+
+      @media (max-width: 768px) {
+        @include education-period-styles(5px);
+        flex-direction: column-reverse;
+        align-items: flex-end;
+      }
+
+      .university {
+        @include university-styles($education-university-size);
+
+        @media (max-width: 768px) {
+          @include university-styles(16px);
+        }
+      }
+
+      .period {
+        @include education-period-tag(4px, 12px);
+
+        @media (max-width: 768px) {
+          @include education-period-tag(3px, 10px);
+          font-size: 16px;
+        }
+      }
+    }
+
+    .education-description {
+      @include education-description-styles($education-description-size);
+
+      @media (max-width: 768px) {
+        @include education-description-styles(16px);
+      }
+    }
+  }
+
+  // Стилі для хобі
+  .hobbies-grid {
+    @include hobby-grid-layout(
+      $hobby-grid-max-width,
+      $hobby-grid-margin-right,
+      $hobby-grid-gap-vertical,
+      $hobby-grid-gap-horizontal
+    );
+
+    @media (max-width: 768px) {
+      @include hobby-grid-layout(
+        400px,
+        40px,
+        20px,
+        30px
+      );
+      left: 40px;
+    }
+
+    @media (max-width: 480px) {
+      @include hobby-grid-layout(
+        300px,
+        30px,
+        15px,
+        20px
+      );
+      left: 20px;
+      justify-content: center;
+    }
+  }
+
+  .hobby-item {
+    @extend %hobby-base-item;
+    @include hobby-item-styles(
+      $hobby-item-padding-vertical,
+      $hobby-item-padding-horizontal,
+      $hobby-item-gap
+    );
+    @include hobby-dot($hobby-dot-size, $hobby-red);
+
+    @media (max-width: 768px) {
+      @include hobby-item-styles(6px, 12px, 8px);
+      @include hobby-dot(6px, $hobby-red);
+    }
+
+    @media (max-width: 480px) {
+      @include hobby-item-styles(5px, 10px, 8px);
+      @include hobby-dot(5px, $hobby-red);
+      
+      // Адаптивність для малих екранів
+      white-space: normal;
+      text-align: center;
+      
+      .hobby-name {
+        white-space: normal;
+        text-align: center;
+      }
+    }
+
+    .hobby-name {
+      @include hobby-text-styles($hobby-name-size, right);
+
+      @media (max-width: 768px) {
+        @include hobby-text-styles(18px, right);
+      }
+
+      @media (max-width: 480px) {
+        @include hobby-text-styles(16px, center);
+      }
+    }
+  }
+}
+
+// Для дуже малих екранів
+@media (max-width: 360px) {
+  .education-section {
+    .hobby-name {
+      font-size: 14px;
+      word-break: break-word;
+    }
+    
+    .hobbies-grid {
+      gap: 12px 15px;
+    }
+  }
+}
