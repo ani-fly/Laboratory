@@ -8,6 +8,7 @@ $reference-very-light-grey: #f0f0f0;
 
 // Розміри та відступи
 $reference-padding-right: 80px;
+$reference-padding-bottom: 80px;
 $reference-container-max-width: 1200px;
 $reference-container-padding: 0 40px;
 $reference-title-size: 35px;
@@ -96,7 +97,7 @@ $reference-dot-size: 8px;
 
 // Основні стилі references секції
 .references-section {
-  padding: 0 $reference-padding-right 0 0;
+  padding: 0 $reference-padding-right $reference-padding-bottom 0 ;
   background: $reference-white;
   position: relative;
 
@@ -104,6 +105,7 @@ $reference-dot-size: 8px;
     max-width: $reference-container-max-width;
     margin: 0 auto;
     padding: $reference-container-padding;
+    margin-bottom: $reference-padding-bottom;
 
     @media (max-width: 480px) {
       padding: 0 20px;
