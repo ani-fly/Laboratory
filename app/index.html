@@ -6,54 +6,61 @@
   <title>John Parker</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.min.css">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="main-container">
-  <div class="row">
-
-    <div class="col-12 col-md-4 left-column">
-      <div class="red-block"></div>
-      <div class="header-block">
-        @@include('html/header.html')
+    <div class="row">
+      <div class="col-12 col-md-4 left-column">
+        <div class="red-block"></div>
+        <div class="header-block">
+          @@include('html/header.html')
+        </div>
+      </div>
+      <div class="col-12 col-md-8 right-column">
+        <div class="about-me-block">
+          @@include('html/aboutme.html')
+        </div>
+        <div class="contact-me-block">
+          @@include('html/contact.html')
+        </div>
       </div>
     </div>
 
-
-    <div class="col-12 col-md-8 right-column">
-      <div class="about-me-block">
-        @@include('html/aboutme.html')
-      </div>
-      <div class="contact-me-block">
-        @@include('html/contact.html')
+    <div class="container-fluid">
+      <div class="row g-0">
+        <div class="col-md-6 d-flex flex-column">
+          <div class="experience-block flex-grow-1">
+            @@include('html/experience.html')
+          </div>
+          <div class="skills-block flex-grow-1">
+            @@include('html/skills.html')
+          </div>
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+          <div class="references-block flex-grow-1">
+            @@include('html/references.html')
+          </div>
+          <div class="education-block flex-grow-1">
+            @@include('html/education.html')
+          </div>
+        </div>
       </div>
     </div>
-
+<div class="footer-features">
+  <div class="feature-item">
+    <i class="fa-solid fa-layer-group"></i>
+    <span class="feature-item-text">Well Organized<br>Layers and Groups</span>
   </div>
-
-<div class="container-fluid">
-  <div class="row g-0"> <!-- Додано g-0 для видалення проміжків -->
-    <!-- Ліва колонка -->
-    <div class="col-md-6 d-flex flex-column">
-      <div class="experience-block flex-grow-1">
-        @@include('html/experience.html')
-      </div>
-      <div class="skills-block flex-grow-1">
-        @@include('html/skills.html')
-      </div>
-    </div>
-
-    <!-- Права колонка -->
-    <div class="col-md-6 d-flex flex-column">
-      <div class="references-block flex-grow-1">
-        @@include('html/references.html')
-      </div>
-      <div class="education-block flex-grow-1">
-        @@include('html/education.html')
-      </div>
-    </div>
+  <div class="feature-item">
+    <i class="fa-solid fa-pen"></i>
+    <span class="feature-item-text">Fully<br>Editable</span>
   </div>
+  <div class="feature-item">
+    <i class="fa-regular fa-folder"></i>
+    <span class="feature-item-text">PSD File with<br>Smart Object</span>
+  </div>
+</div>
 </div>
 </body>
 </html>
