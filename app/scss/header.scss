@@ -7,11 +7,12 @@ $header-dark-grey: #454545;
 $header-very-light-grey: #f0f0f0;
 
 // Розміри та відступи
-$header-red-block-width: 560px;
+$header-red-block-width: 520px;
 $header-red-block-height: 330px;
 $header-red-block-margin-bottom: -260px;
-$header-red-block-margin-left: -123px;
+$header-red-block-margin-left: 10px;
 $header-red-block-margin-top: 0px;
+//$header-red-block-margin-right: 100px;
 
 $header-photo-max-width: 350px;
 $header-photo-border-width: 8px;
@@ -24,13 +25,13 @@ $header-name-role-padding-right: 30px;
 $header-name-role-padding-bottom: 30px;
 $header-name-role-padding-left: 100px;
 $header-name-role-margin-top: -120px;
-$header-name-role-margin-left: -38px;
+$header-name-role-margin-left: -20px;
 
 $header-name-size: 70px;
 $header-role-size: 18px;
 
 // Міксіни для header секції
-@mixin red-block-styles($width: 560px, $height: 330px, $margin-bottom: -260px, $margin-left: -100px, $margin-top: 30px) {
+@mixin red-block-styles($width: 520px, $height: 330px, $margin-bottom: -260px, $margin-left: -100px, $margin-top: 30px) {
   width: $width;
   height: $height;
   background-color: $header-red;
@@ -62,7 +63,6 @@ $header-role-size: 18px;
   z-index: 2;
   min-height: 150px;
   box-sizing: border-box;
-  border: 8px solid $header-white;
 }
 
 @mixin name-styles($font-size: 70px, $font-weight: normal, $line-height: 0.9) {
