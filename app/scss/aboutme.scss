@@ -6,8 +6,6 @@ $about-me-grey: rgb(69, 69, 69);
 $about-me-dark-grey: #454545;
 $about-me-very-light-grey: #f0f0f0;
 
-
-
 // Міксін для вертикальної лінії
 @mixin vertical-line($position: left, $color: $about-me-grey, $width: 3px, $top: 60px, $bottom: 40px) {
   &::after {
@@ -66,7 +64,7 @@ $about-me-very-light-grey: #f0f0f0;
   // Математичні операції для розмірів
   padding: 30px;
   border-left: 8px solid $about-me-light-grey;
-  margin-left: -40px;
+  margin-left: -50px;
   padding-left: 80px;
   margin-bottom: -20px;
   width: calc(100% + 30px);
@@ -84,11 +82,11 @@ $about-me-very-light-grey: #f0f0f0;
     text-align: center;
     font-weight: bold;
     
-    // Математичні операції для розміру шрифту
+    // ЗБІЛЬШЕНО розмір шрифту для заголовка
     @include responsive-text(
-      35px,   // desktop
-      28px,   // tablet  
-      24px    // mobile
+      38px,   // desktop (збільшено з 35px)
+      32px,   // tablet (збільшено з 28px)  
+      28px    // mobile (збільшено з 24px)
     );
     
     margin-bottom: 0;
@@ -114,19 +112,19 @@ $about-me-very-light-grey: #f0f0f0;
   p {
     @extend %about-me-text-content;
     
-    // Математичні операції
-    font-size: 20px;
+    // ЗБІЛЬШЕНО розмір шрифту для тексту
+    font-size: 24px; // збільшено з 20px
     padding: 0 40px 40px 40px;
     text-align: justify;
 
     // Адаптивність для параграфа
     @media (max-width: 992px) {
-      font-size: 16px;
+      font-size: 20px; // збільшено з 16px
       padding: 0 20px 30px 20px;
     }
 
     @media (max-width: 768px) {
-      font-size: 14px;
+      font-size: 16px; // збільшено з 14px
       padding: 0 15px 20px 15px;
     }
   }
@@ -164,12 +162,12 @@ $about-me-very-light-grey: #f0f0f0;
     padding-left: 30px;
 
     .section-title {
-      font-size: 22px;
+      font-size: 24px; // збільшено з 22px
       padding: 15px 10px 0 10px;
     }
 
     p {
-      font-size: 13px;
+      font-size: 15px; // збільшено з 13px
       padding: 0 10px 15px 10px;
     }
   }
@@ -193,7 +191,7 @@ $about-me-very-light-grey: #f0f0f0;
   );
 
   .section-title {
-    font-size: 42px; // 35px * 1.2
+    font-size: 48px; // збільшено з 42px
     
     i {
       background-color: $about-me-red;
@@ -217,12 +215,12 @@ $about-me-very-light-grey: #f0f0f0;
   }
 
   .section-title {
-    font-size: 28px; // 35px * 0.8
+    font-size: 32px; // збільшено з 28px
     padding: 24px 24px 0 24px; // 40px * 0.6
   }
 
   p {
-    font-size: 16px; // 20px * 0.8
+    font-size: 18px; // збільшено з 16px
     padding: 0 24px 24px 24px; // 40px * 0.6
   }
 }
@@ -232,7 +230,7 @@ $about-me-very-light-grey: #f0f0f0;
   @extend %about-me-text-content;
   
   // Математичні операції
-  font-size: 22px; // 20px * 1.1
+  font-size: 26px; // збільшено з 22px
   background-color: $about-me-very-light-grey;
   padding: 10px; // 30px / 3
   border-radius: 5px; // 10px / 2

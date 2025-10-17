@@ -1,3 +1,9 @@
+// додати лінію в contact me
+//поправити skills
+//забрати сіру рамку
+//зміниши товщину companу name
+//поправити відступи в header, портфель, education
+//додатково: змінено розмір фото, розмір header
 @use 'header';
 @use 'aboutme';
 @use 'contactme';
@@ -113,7 +119,7 @@ $breakpoints: (
   }
 }
 
-// Основний контейнер з сірою рамкою
+// Основний контейнер БЕЗ сірої рамки
 body {
   margin: 0;
   font-family: font(primary);
@@ -125,32 +131,11 @@ body {
 }
 
 .main-container {
-  
-  border: spacing(xxl) solid color(light-grey);
   position: relative;
-  min-height: calc(100vh - #{spacing(xxl) * 2}); // Математична операція
+  min-height: 100vh; 
   box-sizing: border-box;
   background: color(white);
   overflow: visible;
-  
-  @include responsive-property(border-width, spacing(xxl), spacing(lg), spacing(md));
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -#{spacing(xxl)};
-    left: -#{spacing(xxl)};
-    right: -#{spacing(xxl)};
-    bottom: -#{spacing(xxl)};
-    box-shadow: inset 0 0 #{spacing(xl)} rgba(0,0,0,0.4);
-    pointer-events: none;
-    z-index: -1;
-    
-    @include responsive-property(top, -#{spacing(xxl)}, -#{spacing(lg)}, -#{spacing(md)});
-    @include responsive-property(left, -#{spacing(xxl)}, -#{spacing(lg)}, -#{spacing(md)});
-    @include responsive-property(right, -#{spacing(xxl)}, -#{spacing(lg)}, -#{spacing(md)});
-    @include responsive-property(bottom, -#{spacing(xxl)}, -#{spacing(lg)}, -#{spacing(md)});
-  }
 }
 
 // Забезпечуємо правильну роботу з Bootstrap
@@ -236,7 +221,8 @@ body {
 .header-block img {
   max-width: 100%;
   height: auto;
-  max-height: calc(100vh - #{spacing(xxl) * 2});
+  // ВИДАЛЕНО: max-height: calc(100vh - #{spacing(xxl) * 2});
+  max-height: 100vh; // Спрощено без урахування рамки
 }
 
 // Переконайтеся, що всі блоки не виходять за межі
@@ -465,68 +451,4 @@ body {
     }
   }
 }
-.footer-features {
-  position: absolute;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  background: color(light-grey);
-  padding: 20px 40px; // Зменшено вертикальний padding
-  border-radius: 10px 10px 0 0;
-  z-index: 100 !important;
-  
-  @media (max-width: map-get($breakpoints, tablet)) {
-    gap: 30px;
-    padding: 15px 30px;
-    bottom: -50px;
-  }
-  
-  @media (max-width: map-get($breakpoints, mobile)) {
-    gap: 20px;
-    padding: 12px 20px;
-    bottom: -40px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
 
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  color: color(grey);
-  font-size: calc(#{font(size-base)} * 0.875);
-  font-weight: font(weight-bold);
-  text-transform: uppercase;
-  line-height: 1.3;
-  
-  @media (max-width: map-get($breakpoints, tablet)) {
-    gap: 12px;
-  }
-  
-  @media (max-width: map-get($breakpoints, mobile)) {
-    font-size: calc(#{font(size-base)} * 0.75);
-    flex: 0 0 calc(33.333% - 20px);
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
-  }
-  
-  @media (max-width: map-get($breakpoints, small-mobile)) {
-    flex: 0 0 calc(50% - 10px);
-    font-size: calc(#{font(size-base)} * 0.6875);
-  }
-}
-
-.footer-features i {
-  font-size: 24px;
-  color: color(dark-grey);
-  flex-shrink: 0;
-  
-  @media (max-width: map-get($breakpoints, mobile)) {
-    font-size: 20px;
-  }
-}

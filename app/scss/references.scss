@@ -11,14 +11,14 @@ $reference-padding-right: 80px;
 $reference-padding-bottom: 80px;
 $reference-container-max-width: 1200px;
 $reference-container-padding: 0 40px;
-$reference-title-size: 35px;
+$reference-title-size: 38px;
 $reference-title-margin-bottom: 20px;
 $reference-grid-max-width: 600px;
-$reference-grid-gap: 30px;
+$reference-grid-gap: 32px;
 $reference-item-padding-right: 20px;
-$reference-name-size: 20px;
-$reference-address-size: 16px;
-$reference-dot-size: 8px;
+$reference-name-size: 24px;
+$reference-address-size: 20px;
+$reference-dot-size: 12px;
 
 // Міксіни для references секції
 @mixin reference-dot($size: 8px, $color: $reference-grey, $position: right) {

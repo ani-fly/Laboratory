@@ -10,13 +10,13 @@ $education-very-light-grey: #f0f0f0;
 
 // Розміри та відступи
 $education-padding-top: 40px;
-$education-padding-bottom: 300px; // Збільшено для хобі
+$education-padding-bottom: 300px; 
 $education-padding-sides: 40px;
-$education-title-size: 35px;
-$education-degree-size: 24px;
-$education-university-size: 20px;
-$education-description-size: 20px;
-$education-period-size: 18px;
+$education-title-size: 38px;
+$education-degree-size: 28px;
+$education-university-size: 24px;
+$education-description-size: 24px;
+$education-period-size: 24px;
 
 // Локальні змінні для hobbies секції
 $hobby-red: #c40e0e;
@@ -26,12 +26,13 @@ $hobby-dark-grey: #454545;
 // Розміри та відступи для хобі
 $hobby-title-margin-top: 95px;
 $hobby-title-margin-bottom: 60px;
-$hobby-grid-max-width: 500px;
-$hobby-grid-margin-right: 80px;
+$hobby-title-margin-right: -10px;
+$hobby-grid-max-width: 525px;
+$hobby-grid-margin-right: 0;
 $hobby-grid-gap-vertical: 25px;
 $hobby-grid-gap-horizontal: 40px;
 $hobby-item-padding-vertical: 8px;
-$hobby-item-padding-horizontal: 15px;
+$hobby-item-padding-horizontal: 0;
 $hobby-item-gap: 10px;
 $hobby-name-size: 20px;
 $hobby-dot-size: 8px;
@@ -118,7 +119,7 @@ $hobby-dot-size: 8px;
 
 @mixin degree-styles($font-size: 24px) {
   font-size: $font-size;
-  font-weight: bold;
+  font-weight: medium;
   color: $education-red;
   margin: 0 0 5px 0;
   text-transform: uppercase;
@@ -134,7 +135,7 @@ $hobby-dot-size: 8px;
 }
 
 @mixin university-styles($font-size: 20px) {
-  font-weight: bold;
+  font-weight: medium;
   color: #666;
   font-size: $font-size;
 }
@@ -143,7 +144,7 @@ $hobby-dot-size: 8px;
   padding: $padding-vertical $padding-horizontal;
   border-radius: 20px;
   font-size: $education-period-size;
-  font-weight: bold;
+  font-weight: medium;
   background: transparent;
   color: #666;
 }
@@ -268,8 +269,8 @@ $hobby-dot-size: 8px;
 
   .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $education-padding-sides 100px $education-padding-sides;
+    margin: 0 0 0 auto;
+    padding: 0 $education-padding-sides 100px 130px;
     position: relative;
     z-index: 3;
 
@@ -300,7 +301,7 @@ $hobby-dot-size: 8px;
     &.hobbies-title {
       margin-top: $hobby-title-margin-top;
       margin-bottom: $hobby-title-margin-bottom;
-      left: 80px;
+      left: 120px;
       
       @media (max-width: 768px) {
         margin-top: 60px;

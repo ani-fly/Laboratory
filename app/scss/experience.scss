@@ -7,14 +7,15 @@ $experience-dark-grey: #454545;
 $experience-very-light-grey: #f0f0f0;
 
 // Розміри та відступи
+//$experience-padding-left: 30px;
 $experience-padding-bottom: 40px;
-$experience-title-size: 35px;
-$experience-title-margin-left: 90px;
+$experience-title-size: 38px;
+$experience-title-margin-left: 70px;
 $experience-title-margin-bottom: 50px;
-$experience-job-title-size: 24px;
-$experience-company-size: 20px;
-$experience-description-size: 20px;
-$experience-period-size: 18px;
+$experience-job-title-size: 28px;
+$experience-company-size: 24px;
+$experience-description-size: 24px;
+$experience-period-size: 24px;
 
 // Міксіни для experience секції
 @mixin timeline-styles($left: 40px, $width: 25px, $height: calc(100% - 40px)) {
@@ -79,16 +80,18 @@ $experience-period-size: 18px;
 }
 
 @mixin company-styles($font-size: 20px) {
-  font-weight: bold;
+  font-weight: medium;
   color: #666;
   font-size: $font-size;
+  font-family: Arial, sans-serif;
+
 }
 
 @mixin period-styles($padding-vertical: 4px, $padding-horizontal: 12px) {
   padding: $padding-vertical $padding-horizontal;
   //border-radius: 20px;
   font-size: $experience-period-size;
-  font-weight: bold;
+  font-weight: medium;
   color: #666;
 }
 
