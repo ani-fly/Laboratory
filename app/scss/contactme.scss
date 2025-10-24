@@ -1,317 +1,135 @@
-// Локальні змінні для contact секції
-$contact-white: white;
-$contact-red: #c40e0e;
-$contact-light-grey: #d3d3d3;
-$contact-grey: rgb(69, 69, 69);
-$contact-dark-grey: #454545;
-$contact-very-light-grey: #f0f0f0;
-
-// Розміри та відступи
-$contact-padding-top: 20px;
-$contact-padding-bottom: 30px;
-$contact-padding-left: 100px;
-$contact-height: 200px;
-$contact-gap: 10px;
-$contact-title-size: 36px;
-$contact-text-size: 24px;
-$contact-text-padding: 25px;
-
-// Міксіни для contact секції
-@mixin contact-section-styles($padding-top: 20px, $padding-bottom: 30px, $padding-left: 100px, $height: 200px) {
-  background-color: $contact-very-light-grey;
-  padding: $padding-top 0 $padding-bottom $padding-left;
-  margin: 0 -40px;
+.contact-section {
+  background-color: #f0f0f0;
+  position: relative;
+  padding: 15px 20px 30px 20px;
+  margin: 20px -40px;
   width: calc(100% + 30px);
-  height: $height;
-}
-
-@mixin contact-title-styles($font-size: 36px, $margin-bottom: 15px) {
+  height: auto;
+  overflow: hidden;
+  transition: all 0.3s ease;
   text-align: center;
-  font-weight: bold;
-  font-size: $font-size;
-  margin-bottom: $margin-bottom;
-  text-transform: uppercase;
-  color: $contact-grey;
-  
-  i {
-    color: $contact-white;
-    background-color: $contact-red;
-    border-radius: 50%;
-    width: calc(#{$font-size} * 1.142);
-    height: calc(#{$font-size} * 1.142);
-    display: flex;
+
+  &.collapsed .contact-info {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: rgb(69, 69, 69);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(#{$font-size} * 0.571);
-  }
-}
+    gap: 10px;
 
-@mixin contact-info-styles($gap: 10px) {
-  display: flex;
-  justify-content: space-between;
-  gap: $gap;
-}
-
-@mixin contact-column-styles($width: 48%, $gap: 10px, $text-padding: 25px) {
-  width: $width;
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    li {
-      margin-bottom: calc(#{$gap} - 5px);
-      padding-left: $text-padding;
-      position: relative;
-      line-height: 1.5;
-      list-style: square;
-      list-style-position: outside;
-      margin-left: calc(#{$gap} - 5px);
-      font-size: $contact-text-size;
-    
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 10px;
-        height: 80px;
-        width: 1px;
-        background-color: $contact-grey;
-        margin-left: 8px;
-      }
-    }
-  }
-}
-
-@mixin contact-item-styles($margin-bottom: 10px, $padding-left: 25px, $margin-left: 10px, $font-size: 24px) {
-  margin-bottom: $margin-bottom;
-  padding-left: $padding-left;
-  position: relative;
-  line-height: 1.5;
-  list-style: square;
-  list-style-position: outside;
-  margin-left: $margin-left;
-  font-size: $font-size;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    height: 80px;
-    width: 1px;
-    background-color: $contact-grey;
-    margin-left: 8px;
-  }
-}
-
-// Placeholder для наслідування
-%contact-base-section {
-  background-color: $contact-very-light-grey;
-  position: relative;
-}
-
-%contact-list-item {
-  position: relative;
-  line-height: 1.5;
-  list-style: square;
-  list-style-position: outside;
-  padding-left: 25px;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    height: 80px;
-    width: 1px;
-    background-color: $contact-grey;
-    margin-left: 8px;
-  }
-}
-
-// Основні стилі contact секції
-.contact-section {
-  @extend %contact-base-section;
-  @include contact-section-styles(
-    $contact-padding-top,
-    $contact-padding-bottom,
-    $contact-padding-left,
-    $contact-height
-  );
-   
-  .contact-info .col-6 ul li:last-child::after {
-    display: none;
-  }
-  
-  // Адаптивність для планшетів
-  @media (max-width: 992px) {
-    @include contact-section-styles(
-      20px,
-      20px,
-      80px,
-      auto
-    );
-    min-height: 180px;
-  }
-
-  // Адаптивність для мобільних
-  @media (max-width: 768px) {
-    @include contact-section-styles(
-      15px,
-      15px,
-      40px,
-      auto
-    );
-    margin: 0;
-    width: 100%;
-  }
-
-  .section-title {
-    @include contact-title-styles(
-      $contact-title-size,
-      15px
-    );
-
-    @media (max-width: 768px) {
-      @include contact-title-styles(
-        28px,
-        10px
-      );
+    i.phone-icon {
+      color: white;
+      background-color: #c40e0e;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
     }
 
-    @media (max-width: 480px) {
-      @include contact-title-styles(
-        24px,
-        8px
-      );
+    .arrow {
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      border: solid #333;
+      border-width: 0 3px 3px 0;
+      padding: 4px;
+      transform: rotate(45deg);
     }
+  }
+
+  &.collapsed .section-title .arrow {
+    transform: rotate(-135deg);
   }
 
   .contact-info {
-    @include contact-info-styles($contact-gap);
-
-    @media (max-width: 768px) {
-      @include contact-info-styles(8px);
-      flex-direction: column;
-    }
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-height: 400px;
+    overflow: hidden;
+    opacity: 1;
 
     .col-6 {
-      @include contact-column-styles(48%, $contact-gap, $contact-text-padding);
-
-      @media (max-width: 768px) {
-        @include contact-column-styles(100%, 8px, 20px);
-        
-        ul li {
-          @include contact-item-styles(
-            8px,
-            20px,
-            8px,
-            20px
-          );
-        }
-      }
-
-      @media (max-width: 480px) {
-        ul li {
-          @include contact-item-styles(
-            6px,
-            18px,
-            5px,
-            16px
-          );
-        }
-      }
+      width: 300px;
 
       ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
         li {
-          @extend %contact-list-item;
-          
-          // Специфічні стилі для різних типів контактів
-          &.email-item::before {
-            content: '✉️';
-            margin-right: 10px;
-          }
-          
-          &.phone-item::before {
-            content: '📱';
-            margin-right: 10px;
-          }
-          
-          &.location-item::before {
-            content: '📍';
-            margin-right: 10px;
+          position: relative;
+          padding-left: 35px; 
+          line-height: 1.5;
+          font-size: 20px;
+          list-style: square outside;
+          margin-bottom: 0; // прибираємо margin-bottom для суцільної лінії
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: rgb(69, 69, 69);
           }
         }
       }
-    }
-  }
-}
 
-// Демонстрація математичних операцій та наслідування
-.contact-section--compact {
-  @extend .contact-section;
-  
-  @include contact-section-styles(
-    30px,
-    30px,
-    80px,
-    160px
-  );
-  
-  .section-title {
-    @include contact-title-styles(
-      28px,
-      10px
-    );
-  }
-}
-
-.contact-info--vertical {
-  @include contact-info-styles(8px);
-  flex-direction: column;
-  
-  .col-6 {
-    @include contact-column-styles(100%, 8px, 20px);
-  }
-}
-
-// Додаткові варіації для демонстрації
-.contact-item--highlighted {
-  @extend %contact-list-item;
-  
-  @include contact-item-styles(15px, 25px, 15px, 26px);
-  background-color: $contact-white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  border-left: 3px solid $contact-red;
-  
-  &::marker {
-    color: $contact-red;
-  }
-}
-
-.contact-section--dark {
-  @extend .contact-section;
-  background-color: $contact-dark-grey;
-  
-  .section-title {
-    color: $contact-white !important;
-    
-    i {
-      background-color: $contact-white;
-      color: $contact-dark-grey;
-    }
-  }
-  
-  .contact-info {
-    .col-6 ul li {
-      color: $contact-white;
-      
-      &::marker {
-        color: $contact-red;
+      // Друга колонка без лінії
+      &:last-child li::before {
+        display: none;
       }
+    }
+  }
+
+  // Адаптивність
+  @media (max-width: 992px) {
+    padding: 15px 15px;
+
+    .contact-info {
+      flex-direction: column;
+      gap: 8px;
+
+      .col-6 {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 10px;
+
+    .section-title {
+      font-size: 24px;
+    }
+
+    .contact-info .col-6 ul li {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 20px;
+    }
+
+    .contact-info .col-6 ul li {
+      font-size: 16px;
     }
   }
 }
