@@ -14,7 +14,8 @@ const paths = {
   html: ["app/*.html"],        // головні файли
   scss: "app/scss/**/*.scss",  // стилі
   js: "app/js/**/*.js",        // скрипти
-  images: "app/img/**/*"       // картинки
+  images: "app/img/**/*",      // картинки
+  data: "app/*.json"
 };
 
 // HTML task
@@ -27,7 +28,11 @@ function html() {
     .pipe(gulp.dest("dist"))
     .pipe(browserSync.stream());
 }
-
+function data() {
+  return gulp.src(paths.data)
+    .pipe(gulp.dest("dist"))
+    .pipe(browserSync.stream());
+}
 // SCSS task
 function scss() {
   return gulp.src(paths.scss)
@@ -81,6 +86,7 @@ function serve() {
   gulp.watch(paths.scss, scss);
   gulp.watch(paths.js, js);
   gulp.watch(paths.images, images);
+  gulp.watch(paths.data, data);
 }
 gulp.task('scss', function() {
   return gulp.src('src/scss/**/*.scss')
@@ -102,6 +108,6 @@ exports.serve = serve;
 
 // Default task
 exports.default = gulp.series(
-  gulp.parallel(html, scss, js, images, bootstrapCSS, bootstrapJS),
+  gulp.parallel(html, scss, js, images, data, bootstrapCSS, bootstrapJS),
   serve
 );

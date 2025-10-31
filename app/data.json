@@ -1,0 +1,15 @@
+{
+  "firstName": "John",
+  "lastName": "Parker",
+  "hobbies": [
+    "TRAVELING",
+    "PLAYING FOOTBALL",
+    "READING BOOKS"
+  ],
+  "skills": [
+    { "name": "Microsoft Word", "level": 50 },
+    { "name": "Adobe Illustrator", "level": 50 },
+    { "name": "Microsoft PowerPoint", "level": 70 },
+    { "name": "Adobe Photoshop", "level": 50 }
+  ]
+}
